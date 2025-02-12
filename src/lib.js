@@ -3,7 +3,7 @@
 import { encodeBase64 } from "./base64.ts";
 import { WASM_BUFFER as wasmBuff } from "./wasm.js";
 import { maybeHSL } from "./color_util.ts";
-
+import { dirname, normalize } from "./posix.js"
 let document = { getElementById: () => undefined };
 
 export var CanvasKitInit = (function () {
@@ -3782,12 +3782,10 @@ export var CanvasKitInit = (function () {
       Ba = !xa && !Aa && !za;
       var Ca = "", Da, Ea, Fa, Ga, Ja;
       if (Aa) {
-        Ca = za ? require("path").dirname(Ca) + "/" : __dirname + "/",
+        Ca = za ? dirname(Ca) + "/" : __dirname + "/",
           Da = function (a, b) {
-            Ga || (Ga = require("fs"));
-            Ja || (Ja = require("path"));
-            a = Ja.normalize(a);
-            return Ga.readFileSync(a, b ? null : "utf8");
+            a = normalize(a);
+            return Deno.readFileSync(a, b ? null : "utf8");
           },
           Fa = function (a) {
             a = Da(a, !0);
