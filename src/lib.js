@@ -1,7 +1,7 @@
 // NOTE: ported from https://unpkg.com/canvaskit-wasm@0.32.0
 
 import { encodeBase64 } from "./base64.ts";
-import { WASM_BUFFER as wasmBuff } from "./wasm.js";
+import wasmBuff from "./canvaskit-opt.wasm.binaryified.js";
 import { maybeHSL } from "./color_util.ts";
 import { dirname, normalize } from "./posix.js"
 let document = { getElementById: () => undefined };

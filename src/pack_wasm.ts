@@ -1,8 +1,7 @@
-import { encode } from "../deps.ts";
+import { binaryify } from "https://deno.land/x/binaryify@2.5.4.1/binaryify_api.js"
 
-Deno.writeTextFileSync(
-  Deno.args[0] ?? "./src/wasm.js",
-  `import { decodeBase64 } from "./base64.ts";\nexport const WASM_BUFFER = decodeBase64("${
-    encode(Deno.readFileSync(Deno.args[1] ?? "./src/canvaskit-opt.wasm"))
-  }");`,
-);
+await binaryify({
+    pathToBinary: "./src/canvaskit-opt.wasm",
+    pathToBinarified: "./src/canvaskit-opt.wasm.binaryified.js",
+    disableSelfUpdating: false, // default is false
+})
